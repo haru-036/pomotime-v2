@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import Snow from "./snow";
+import { Helmet } from "react-helmet-async";
 
 const Timer = ({ focus }: { focus: boolean }) => {
   const [timeLeft, setTimeLeft] = useState(focus ? 25 * 60 : 5 * 60); // 25分を秒で表現
@@ -53,7 +54,7 @@ const Timer = ({ focus }: { focus: boolean }) => {
         return;
       }
       // 通知の許可を求める
-      Notification.requestPermission().then(() => new Notification("テスト"));
+      Notification.requestPermission();
     }
   }, []);
 
@@ -73,19 +74,18 @@ const Timer = ({ focus }: { focus: boolean }) => {
     handlePushNotif();
     setIsRunning(false);
   }
+  const formattedTime = `${String(Math.floor(timeLeft / 60)).padStart(
+    2,
+    "0"
+  )}:${String(timeLeft % 60).padStart(2, "0")}`;
 
   return (
     <>
-      <title>
-        {isRunning ? (
-          <>
-            {String(Math.floor(timeLeft / 60)).padStart(2, "0")}:
-            {String(timeLeft % 60).padStart(2, "0")}
-          </>
-        ) : (
-          "pomotime"
-        )}
-      </title>
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>{formattedTime}</title>
+      </Helmet>
+
       {isRunning && <Snow />}
       <div className="space-y-10 text-center">
         <h1 className="text-7xl md:text-9xl font-bold">
