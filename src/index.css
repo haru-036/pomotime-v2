@@ -1,0 +1,15 @@
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100..900&family=Reddit+Mono:wght@200..900&family=Roboto+Mono:wght@100..700&family=Zen+Kaku+Gothic+New&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  background-color: #f5f5f5;
+  color: #222;
+}
+
+.dark {
+  background-color: #333;
+  color: #f5f5f5;
+}
