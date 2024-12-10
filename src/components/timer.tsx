@@ -41,7 +41,7 @@ const Timer = ({ focus }: { focus: boolean }) => {
     if (workerRef.current) {
       workerRef.current.postMessage({ command: "stop" });
       setIsRunning(false);
-      setTimeLeft(25 * 60);
+      setTimeLeft(focus ? 25 * 60 : 5 * 60);
     }
   };
 
@@ -77,8 +77,14 @@ const Timer = ({ focus }: { focus: boolean }) => {
   return (
     <>
       <title>
-        {String(Math.floor(timeLeft / 60)).padStart(2, "0")}:
-        {String(timeLeft % 60).padStart(2, "0")}
+        {isRunning ? (
+          <>
+            {String(Math.floor(timeLeft / 60)).padStart(2, "0")}:
+            {String(timeLeft % 60).padStart(2, "0")}
+          </>
+        ) : (
+          "pomotime"
+        )}
       </title>
       {isRunning && <Snow />}
       <div className="space-y-10 text-center">
